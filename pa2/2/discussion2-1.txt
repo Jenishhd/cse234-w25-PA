@@ -1,1 +1,13 @@
-Put discussion here for 2.1
+Results:
+Summary over 100 runs:
+All runs produced correct results.
+Average MPI.Allreduce time: 0.000667 seconds
+Average myAllreduce time:   0.000299 seconds
+
+Summary over 100 runs:
+All runs produced correct results.
+Average MPI.Alltoall time: 0.000504 seconds
+Average myAlltoall time:   0.000681 seconds
+
+Discussion:
+Our myAllreduce implementation runs at roughly 45% of the MPI.Allreduce time (0.000299 s vs. 0.000667 s). This is because the reduced overhead of performing a simple reduce-to-root followed by a broadcast, which is especially effective for small message sizes.The myAlltoall is about 135% of MPI.Alltoall’s time (0.000681 s vs. 0.000504 s). This is probably due to theadded overhead from managing multiple non-blocking operations and data copies.
